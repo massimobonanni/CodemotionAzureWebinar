@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackManager.Core", "Fee
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackManager.CognitiveServices", "FeedbackManager.CognitiveServices\FeedbackManager.CognitiveServices.csproj", "{FA0E0E40-683C-4726-9569-353BF9FE45A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackManager.CosmosDB", "FeedbackManager.CosmosDB\FeedbackManager.CosmosDB.csproj", "{8CA1D787-4A0D-4F00-A895-C4D7CFEAD6D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FA0E0E40-683C-4726-9569-353BF9FE45A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA0E0E40-683C-4726-9569-353BF9FE45A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA0E0E40-683C-4726-9569-353BF9FE45A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CA1D787-4A0D-4F00-A895-C4D7CFEAD6D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA1D787-4A0D-4F00-A895-C4D7CFEAD6D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CA1D787-4A0D-4F00-A895-C4D7CFEAD6D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CA1D787-4A0D-4F00-A895-C4D7CFEAD6D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
