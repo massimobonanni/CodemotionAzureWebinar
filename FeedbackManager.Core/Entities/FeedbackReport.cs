@@ -11,6 +11,6 @@
 
         public string? Language { get; set; }
         public Sentiment Sentiment { get; set; }
-        public decimal SentimentConfidence { get; set; }
+        public double SentimentConfidence { get; set; }
     }
 }
