@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,6 +8,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FeedbackManager.Core\FeedbackManager.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Utilities\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.AI.TextAnalytics" Version="5.2.0" />
   </ItemGroup>
 
 </Project>
