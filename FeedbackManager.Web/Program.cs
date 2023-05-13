@@ -6,7 +6,23 @@ namespace FeedbackManager.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Add app settings file to process for the configuration
+            builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config.AddJsonFile(
+                     "appsettings.json", optional: false, reloadOnChange: true);
+                config.AddJsonFile(
+                    "appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                config.AddJsonFile(
+                    "appsettings.local.json", optional: true, reloadOnChange: true);
+                config.AddJsonFile(
+                    "appsettings.local.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+            });
+
             // Add services to the container.
+            //builder.Services.AddScoped<IFeedbackAnalyzer, CognitiveAnalyzer>();
+
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
