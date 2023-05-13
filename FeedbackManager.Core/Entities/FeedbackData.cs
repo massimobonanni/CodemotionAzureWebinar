@@ -8,6 +8,7 @@ namespace FeedbackManager.Core.Entities
         {
             this.User = user;
             this.Text = text;
+            Timestamp = DateTimeOffset.Now;
         }
 
         public string User { get; set; }
