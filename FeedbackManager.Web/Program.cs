@@ -1,3 +1,6 @@
+using FeedbackManager.CognitiveServices.Services;
+using FeedbackManager.Core.Interfaces;
+
 namespace FeedbackManager.Web
 {
     public class Program
@@ -20,7 +23,7 @@ namespace FeedbackManager.Web
             });
 
             // Add services to the container.
-            //builder.Services.AddScoped<IFeedbackAnalyzer, CognitiveAnalyzer>();
+            builder.Services.AddScoped<IFeedbackAnalyzer, CognitiveAnalyzer>();
 
 
             builder.Services.AddControllersWithViews();
