@@ -8,13 +8,10 @@ namespace FeedbackManager.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IFeedbackAnalyzer _feedbackAnalyzer;
 
-        public HomeController(ILogger<HomeController> logger,
-            IFeedbackAnalyzer feedbackAnalyzer)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _feedbackAnalyzer = feedbackAnalyzer;
         }
 
         public IActionResult Index()
