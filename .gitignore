@@ -399,3 +399,4 @@ FodyWeavers.xsd
 
 # Local settings files
 *.local.json
+/.vscode
