@@ -1,4 +1,5 @@
-﻿using FeedbackManager.Core.Entities;
+﻿using Azure.Identity;
+using FeedbackManager.Core.Entities;
 using FeedbackManager.Core.Interfaces;
 using FeedbackManager.CosmosDB.Configuration;
 using FeedbackManager.CosmosDB.Entities;
@@ -34,10 +35,11 @@ namespace FeedbackManager.CosmosDB.Services
             var reportItem = new FeedbackReportItem(feedbackReport);
             try
             {
-                var client = new CosmosClient(this.configuration.Endpoint);
+                var client = new CosmosClient(this.configuration.Endpoint, this.configuration.AccessKey);
                 var database = client.GetDatabase(this.configuration.DatabaseName);
                 var container = database.GetContainer(this.configuration.ContainerName);
-                await container.CreateItemAsync(reportItem, null, null, cancellationToken);
+                var insertedItem = await container.CreateItemAsync(reportItem, new PartitionKey(reportItem.Data),
+                    null, cancellationToken);
             }
             catch (Exception ex)
             {

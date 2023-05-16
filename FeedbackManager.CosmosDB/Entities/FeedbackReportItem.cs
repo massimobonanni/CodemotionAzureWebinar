@@ -1,5 +1,7 @@
 ﻿using FeedbackManager.Core;
 using FeedbackManager.Core.Entities;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +28,10 @@ namespace FeedbackManager.CosmosDB.Entities
         }
 
         public FeedbackData Feedback { get; set; }
+        [JsonProperty(PropertyName ="id")]
         public Guid Id { get; set; }
         public string? Language { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public Sentiment Sentiment { get; set; }
         public double SentimentConfidence { get; set; }
         public string Data { get; set; }

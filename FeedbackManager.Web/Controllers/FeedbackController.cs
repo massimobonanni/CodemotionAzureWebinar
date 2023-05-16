@@ -11,12 +11,15 @@ namespace FeedbackManager.Web.Controllers
     {
         private readonly ILogger<FeedbackController> _logger;
         private readonly IFeedbackAnalyzer _feedbackAnalyzer;
+        private readonly IFeedbackPersistence _feedbackPersistence;
 
         public FeedbackController(ILogger<FeedbackController> logger,
-            IFeedbackAnalyzer feedbackAnalyzer)
+            IFeedbackAnalyzer feedbackAnalyzer,
+            IFeedbackPersistence feedbackPersistence)
         {
             _logger = logger;
             _feedbackAnalyzer = feedbackAnalyzer;
+            _feedbackPersistence = feedbackPersistence;
         }
 
         public ActionResult Show(ShowViewModel viewModel)
@@ -36,20 +39,26 @@ namespace FeedbackManager.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var feedbackdata= new FeedbackData(viewModel.Username,viewModel.Text);
+                var feedbackdata = new FeedbackData(viewModel.Username, viewModel.Text);
 
-                var result=await this._feedbackAnalyzer.AnalyzeAsync(feedbackdata);
+                var analysisReport = await this._feedbackAnalyzer.AnalyzeAsync(feedbackdata);
 
-                var showModel=new ShowViewModel()
+                if (analysisReport != null)
                 {
-                    Username=viewModel.Username,
-                    Text=viewModel.Text,
-                    Language=result.Language,
-                    Sentiment=result.Sentiment,
-                    SentimentConfidence=result.SentimentConfidence
-                };
-
-                return  RedirectToAction(nameof(Show),showModel);
+                    var insertResult = await this._feedbackPersistence.InsertFeedbackReportAync(analysisReport);
+                    if (insertResult)
+                    {
+                        var showModel = new ShowViewModel()
+                        {
+                            Username = viewModel.Username,
+                            Text = viewModel.Text,
+                            Language = analysisReport.Language,
+                            Sentiment = analysisReport.Sentiment,
+                            SentimentConfidence = analysisReport.SentimentConfidence
+                        };
+                        return RedirectToAction(nameof(Show), showModel);
+                    }
+                }
             }
 
             return View(viewModel);

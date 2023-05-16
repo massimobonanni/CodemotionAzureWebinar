@@ -1,5 +1,6 @@
 using FeedbackManager.CognitiveServices.Services;
 using FeedbackManager.Core.Interfaces;
+using FeedbackManager.CosmosDB.Services;
 
 namespace FeedbackManager.Web
 {
@@ -24,7 +25,7 @@ namespace FeedbackManager.Web
 
             // Add services to the container.
             builder.Services.AddScoped<IFeedbackAnalyzer, CognitiveAnalyzer>();
-
+            builder.Services.AddScoped<IFeedbackPersistence, CosmosDBFeedbackPersistance>();
 
             builder.Services.AddControllersWithViews();
 
