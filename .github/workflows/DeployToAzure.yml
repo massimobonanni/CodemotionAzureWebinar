@@ -8,7 +8,7 @@ on:
       - '.github/workflows/**'
 
 env:
-    AZURE_WEBAPP_NAME: 'FeedMngFrontEnd-app'
+    AZURE_WEBAPP_NAME: 'FeedMng-app'
     AZURE_WEBAPP_PACKAGE_PATH: './dotnetcorewebapp'
     PROJECT_NAME: 'FeedbackManager.Web'
 jobs:
