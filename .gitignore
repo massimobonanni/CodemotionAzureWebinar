@@ -401,3 +401,5 @@ FodyWeavers.xsd
 *.local.json
 /.vscode
 FeedbackManager.Web/Properties/ServiceDependencies/FeedMngFrontEnd-app - Web Deploy/profile.arm.json
+/FeedbackManager.Web
+/FeedbackManager.Web
