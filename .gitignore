@@ -400,3 +400,4 @@ FodyWeavers.xsd
 # Local settings files
 *.local.json
 /.vscode
+FeedbackManager.Web/Properties/ServiceDependencies/FeedMngFrontEnd-app - Web Deploy/profile.arm.json
