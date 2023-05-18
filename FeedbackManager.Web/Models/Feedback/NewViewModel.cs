@@ -8,7 +8,6 @@ namespace FeedbackManager.Web.Models.Feedback
 
         public bool IsLogged { get; set; } = false;
 
-        [Required(ErrorMessage ="Feedback is mandatory")]
         public string? Text { get; set; }
     }
 }

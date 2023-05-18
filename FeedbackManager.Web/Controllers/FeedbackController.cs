@@ -43,6 +43,7 @@ namespace FeedbackManager.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> New(NewViewModel viewModel)
         {
+            #region Check user input 
             var loggedUsername = Request.GetPrincipalName();
             if (!string.IsNullOrWhiteSpace(loggedUsername))
             {
@@ -53,6 +54,11 @@ namespace FeedbackManager.Web.Controllers
             {
                 ModelState.AddModelError(nameof(viewModel.Username), "Username is mandatory");
             }
+            if (string.IsNullOrWhiteSpace(viewModel.Text))
+            {
+                ModelState.AddModelError(nameof(viewModel.Text), "Feedback is mandatory");
+            }
+            #endregion
 
             if (ModelState.IsValid)
             {
