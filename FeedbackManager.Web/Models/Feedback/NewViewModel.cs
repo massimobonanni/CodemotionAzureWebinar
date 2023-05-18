@@ -4,12 +4,11 @@ namespace FeedbackManager.Web.Models.Feedback
 {
     public class NewViewModel
     {
-        [Required()]
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         public bool IsLogged { get; set; } = false;
 
-        [Required()]
-        public string Text { get; set; }
+        [Required(ErrorMessage ="Feedback is mandatory")]
+        public string? Text { get; set; }
     }
 }

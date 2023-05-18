@@ -43,6 +43,17 @@ namespace FeedbackManager.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> New(NewViewModel viewModel)
         {
+            var loggedUsername = Request.GetPrincipalName();
+            if (!string.IsNullOrWhiteSpace(loggedUsername))
+            {
+                viewModel.Username = loggedUsername;
+            }
+
+            if (string.IsNullOrWhiteSpace(viewModel.Username))
+            {
+                ModelState.AddModelError(nameof(viewModel.Username), "Username is mandatory");
+            }
+
             if (ModelState.IsValid)
             {
                 var feedbackdata = new FeedbackData(viewModel.Username, viewModel.Text);
