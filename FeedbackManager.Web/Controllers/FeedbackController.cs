@@ -30,6 +30,12 @@ namespace FeedbackManager.Web.Controllers
         public ActionResult New()
         {
             var viewModel = new NewViewModel();
+            var loggedUsername = Request.GetPrincipalName();
+            if (!string.IsNullOrWhiteSpace(loggedUsername))
+            {
+                viewModel.Username = loggedUsername;
+                viewModel.IsLogged = true;
+            }
             return View(viewModel);
         }
 

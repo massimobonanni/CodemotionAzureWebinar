@@ -397,4 +397,8 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-/.vscode
+# Local settings files
+*.local.json
+.vscode
+/Properties/ServiceDependencies/*
+.config
