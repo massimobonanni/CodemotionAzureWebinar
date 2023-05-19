@@ -19,11 +19,11 @@ The following is the section in the configuration file for the library:
 }
 ```
 
-You can retrieve APIKey and Endpoint in the Azure Portal, in the *"Keys and Endpoint"* blade of the Cognitive Service instance: 
+You can retrieve `APIKey` and `Endpoint` in the Azure Portal, in the *"Keys and Endpoint"* blade of the Cognitive Service instance: 
 
-![](Documentation/Images/CognitiveService-APIKeysAndEndpoint.png)
+![The Keys and Endpoint blade of the Cognitive Services instance in the Azure Portal](Documentation/Images/CognitiveService-APIKeysAndEndpoint.png)
 
 ### AppService Configuration
-To configure the configuration blade of the App Service, you must add the keys `CognitiveServices:ApiKey` and `CognitiveServices:Endpoint` as following:
+To configure the *"Configuration"* blade of the App Service, you must add the keys `CognitiveServices:ApiKey` and `CognitiveServices:Endpoint` as following:
 
-![](Documentation/Images/CognitiveService-AppServiceConfiguration.png)
+![The AppService configuration for the Cognitive Service library](Documentation/Images/CognitiveService-AppServiceConfiguration.png)
