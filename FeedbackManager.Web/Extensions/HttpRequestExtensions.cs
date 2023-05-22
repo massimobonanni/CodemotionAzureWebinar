@@ -2,7 +2,7 @@
 
 namespace Microsoft.AspNetCore.Http
 {
-    public static class HttprequestExtensions
+    public static class HttpRequestExtensions
     {
         private const string PrincipalNameHeader = "X-MS-CLIENT-PRINCIPAL-NAME";
 
