@@ -3,7 +3,7 @@
 This project contains the implementation of the interface [IFeedbackPersistence](../FeedbackManager.Core/Interfaces/IFeedbackPersistence.cs) to persist sentiment report information into CosmosDB database.
 
 ## Library Configuration
-The library needs the `ApiKey` and the `Service Endpoint` of the Cognitive Service instance you are using.
+The library needs the `ApiKey` and the `Service Endpoint` of the CosmosDB account you are using.
 
 ### Configuration file
 The following is the section in the configuration file for the library:
@@ -21,7 +21,7 @@ The following is the section in the configuration file for the library:
 }
 ```
 
-You can retrieve Endpoint and AccessKey in the Azure Portal, in the *"Keys"* blade of the Cognitive Service instance: 
+You can retrieve Endpoint and AccessKey in the Azure Portal, in the *"Keys"* blade of the CosmosDB account: 
 
 ![The Keys blade of the CosmosDB account in the Azure Portal](Documentation/Images/CosmosDB-EndpointAndAccessKey.png)
 
