@@ -30,12 +30,9 @@ namespace FeedbackManager.Web.Controllers
         public ActionResult New()
         {
             var viewModel = new NewViewModel();
-            var loggedUsername = Request.GetPrincipalName();
-            if (!string.IsNullOrWhiteSpace(loggedUsername))
-            {
-                viewModel.Username = loggedUsername;
-                viewModel.IsLogged = true;
-            }
+            viewModel.Username = Request.GetAADPrincipalName();
+            viewModel.IsLogged = !string.IsNullOrWhiteSpace(viewModel.Username);
+            
             return View(viewModel);
         }
 
@@ -44,7 +41,7 @@ namespace FeedbackManager.Web.Controllers
         public async Task<ActionResult> New(NewViewModel viewModel)
         {
             #region Check user input 
-            var loggedUsername = Request.GetPrincipalName();
+            var loggedUsername = Request.GetAADPrincipalName();
             if (!string.IsNullOrWhiteSpace(loggedUsername))
             {
                 viewModel.Username = loggedUsername;
