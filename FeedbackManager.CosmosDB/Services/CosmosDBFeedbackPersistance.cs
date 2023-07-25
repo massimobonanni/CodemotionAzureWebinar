@@ -35,11 +35,25 @@ namespace FeedbackManager.CosmosDB.Services
             var reportItem = new FeedbackReportItem(feedbackReport);
             try
             {
-                var client = new CosmosClient(this.configuration.Endpoint, this.configuration.AccessKey);
+                var options = new CosmosClientOptions()
+                {
+                    ApplicationName = "FeedbackManager",
+                    ApplicationRegion = Regions.FranceCentral
+                };
+
+                var client = new CosmosClient(this.configuration.Endpoint,
+                    this.configuration.AccessKey);
+                
                 var database = client.GetDatabase(this.configuration.DatabaseName);
+                
                 var container = database.GetContainer(this.configuration.ContainerName);
-                var insertedItem = await container.CreateItemAsync(reportItem, new PartitionKey(reportItem.Data),
-                    null, cancellationToken);
+                
+                var insertedItem = await container.CreateItemAsync(reportItem, 
+                    new PartitionKey(reportItem.Data),
+                    null, 
+                    cancellationToken);
+
+                LogResponse(insertedItem);
             }
             catch (Exception ex)
             {
@@ -49,6 +63,12 @@ namespace FeedbackManager.CosmosDB.Services
             return response;
         }
 
-
+        private void LogResponse<T>(ItemResponse<T> response)
+        {
+            this.logger.LogInformation("Activity id {0}", response.ActivityId);
+            this.logger.LogInformation("Request charge {0} RU",response.RequestCharge);
+            this.logger.LogInformation("Contacted regions: {0}",
+                string.Join(";", response.Diagnostics.GetContactedRegions().Select(i => i.regionName)));
+        }
     }
 }

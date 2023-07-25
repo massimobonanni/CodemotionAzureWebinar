@@ -24,7 +24,7 @@ namespace FeedbackManager.CosmosDB.Entities
             this.Language=feedbackReport.Language;
             this.SentimentConfidence=feedbackReport.SentimentConfidence;
             this.Sentiment=feedbackReport.Sentiment;
-            this.Data=$"{feedbackReport.Feedback.Timestamp:yyymmdd}";
+            this.Data=$"{feedbackReport.Feedback.Timestamp:yyyyMMdd}";
         }
 
         public FeedbackData Feedback { get; set; }

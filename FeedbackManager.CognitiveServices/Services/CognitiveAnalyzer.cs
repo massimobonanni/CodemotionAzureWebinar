@@ -42,12 +42,15 @@ namespace FeedbackManager.CognitiveServices.Services
             
             try
             {
-                Response<DetectedLanguage> languageResponse = await client.DetectLanguageAsync(feedback.Text);
+                Response<DetectedLanguage> languageResponse = 
+                    await client.DetectLanguageAsync(feedback.Text);
                
                 response.Language = languageResponse.Value.Name;
 
                 AnalyzeSentimentOptions options = new() { IncludeOpinionMining = true };
-                Response<DocumentSentiment> sentimentResponse = await client.AnalyzeSentimentAsync(feedback.Text,languageResponse.Value.Iso6391Name, options);
+                Response<DocumentSentiment> sentimentResponse = 
+                    await client.AnalyzeSentimentAsync(feedback.Text,
+                        languageResponse.Value.Iso6391Name, options);
 
                 response.Sentiment = sentimentResponse.Value.ToSentiment();
                 response.SentimentConfidence = sentimentResponse.Value.GetConfidence();
