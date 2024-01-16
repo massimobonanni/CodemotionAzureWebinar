@@ -35,11 +35,11 @@ namespace FeedbackManager.CosmosDB.Services
             var reportItem = new FeedbackReportItem(feedbackReport);
             try
             {
-                var options = new CosmosClientOptions()
-                {
-                    ApplicationName = "FeedbackManager",
-                    ApplicationRegion = Regions.FranceCentral
-                };
+                //var options = new CosmosClientOptions()
+                //{
+                //    ApplicationName = "FeedbackManager",
+                //    ApplicationRegion = Regions.FranceCentral
+                //};
 
                 var client = new CosmosClient(this.configuration.Endpoint,
                     this.configuration.AccessKey);
