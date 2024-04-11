@@ -1,6 +1,6 @@
 # Feedback Manager for Codemotion Webinar
 
-This project is the demo proposed for the webinar (here add the link to the recording version of the webinar).
+This project is the demo proposed for the webinar ([Webinar](https://events.codemotion.com/webinars/costruisci-la-tua-prima-applicazione-web-su-azure)).
 
 It's a simple solution for entering textual feedback into a database with sentiment analysis.
 
