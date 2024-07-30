@@ -29,6 +29,9 @@ resource appService 'Microsoft.Web/sites@2022-09-01' = {
   properties:{
     serverFarmId: appServicePlan.id
   }
+  identity: {
+    type: 'SystemAssigned'
+  }
 }
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -49,6 +52,10 @@ resource appSettings 'Microsoft.Web/sites/config@2022-03-01' = {
     APPLICATIONINSIGHTS_CONNECTION_STRING: appInsights.properties.ConnectionString
     ApplicationInsightsAgent_EXTENSION_VERSION: '~3'
     XDT_MicrosoftApplicationInsights_Mode : 'Recommended'
+    'CognitiveServices:ApiKey':''
+    'CognitiveServices:Endpoint':''
+    'CosmosDB:AccessKey':''
+    'CosmosDB:Endpoint':''
   }
 }
 
