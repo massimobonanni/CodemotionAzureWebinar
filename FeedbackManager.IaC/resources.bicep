@@ -52,10 +52,10 @@ resource appSettings 'Microsoft.Web/sites/config@2022-03-01' = {
     APPLICATIONINSIGHTS_CONNECTION_STRING: appInsights.properties.ConnectionString
     ApplicationInsightsAgent_EXTENSION_VERSION: '~3'
     XDT_MicrosoftApplicationInsights_Mode : 'Recommended'
-    'CognitiveServices:ApiKey':''
-    'CognitiveServices:Endpoint':''
-    'CosmosDB:AccessKey':''
-    'CosmosDB:Endpoint':''
+    'CognitiveServices:ApiKey': '@Microsoft.KeyVault(SecretUri=${cognitiveServiceKeySecret.properties.secretUri})'
+    'CognitiveServices:Endpoint': cognitiveService.properties.endpoint
+    'CosmosDB:AccessKey':'@Microsoft.KeyVault(SecretUri=${cosmosDBKeySecret.properties.secretUri})'
+    'CosmosDB:Endpoint':cosmosDBAccount.properties.documentEndpoint
   }
 }
 
@@ -98,6 +98,38 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
       defaultAction: 'Allow'
       bypass: 'AzureServices'
     }
+  }
+}
+
+resource cognitiveServiceKeySecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+  name: 'CognitiveServiceKey'
+  parent: keyVault
+  properties: {
+    attributes: {
+      enabled: true
+    }
+    value: cognitiveService.listKeys().key1
+  }
+}
+
+resource cosmosDBKeySecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+  name: 'CosmosDBKey'
+  parent: keyVault
+  properties: {
+    attributes: {
+      enabled: true
+    }
+    value: cosmosDBAccount.listKeys().primaryMasterKey
+  }
+}
+
+resource appServiceKeyVaultAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+  name: guid('Key Vault Secret User', appServiceName, subscription().subscriptionId)
+  scope: keyVault
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6') // this is the role "Key Vault Secrets User"
+    principalId: appService.identity.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 
@@ -157,7 +189,7 @@ resource cosmosDBContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/c
       }
       partitionKey: {
         paths: [
-          '/data'
+          '/Data'
         ]
         kind: 'Hash'
         version: 2
