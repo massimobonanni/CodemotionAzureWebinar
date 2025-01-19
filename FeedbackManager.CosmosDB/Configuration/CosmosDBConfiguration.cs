@@ -17,14 +17,19 @@ namespace FeedbackManager.CosmosDB.Configuration
         private readonly IConfiguration configuration;
 
         public string? Endpoint { get; set; }
-        public string? AccessKey { get; set; }
         public string? DatabaseName { get; set; } = "feedbackManager";
         public string? ContainerName { get; set; } = "feedback";
+        public string? ClientId { get; set; }
+        public string? TenantId { get; set; }
+        public string? ClientSecret { get; set; }
+
 
         public void Load()
         {
             Endpoint = configuration["CosmosDB:Endpoint"];
-            AccessKey = configuration["CosmosDB:AccessKey"];
+            ClientId = configuration["CosmosDB:ClientId"];
+            TenantId = configuration["CosmosDB:TenantId"];
+            ClientSecret = configuration["CosmosDB:ClientSecret"];
             if (configuration["CosmosDB:DatabaseName"]!=null)
             {
                 DatabaseName = configuration["CosmosDB:DatabaseName"];

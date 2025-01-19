@@ -1,4 +1,5 @@
-﻿using Azure.Identity;
+﻿using Azure.Core;
+using Azure.Identity;
 using FeedbackManager.Core.Entities;
 using FeedbackManager.Core.Interfaces;
 using FeedbackManager.CosmosDB.Configuration;
@@ -41,8 +42,11 @@ namespace FeedbackManager.CosmosDB.Services
                 //    ApplicationRegion = Regions.FranceCentral
                 //};
 
-                var client = new CosmosClient(this.configuration.Endpoint,
-                    this.configuration.AccessKey);
+                var tokenCredential = new ClientSecretCredential(
+                    this.configuration.TenantId,
+                    this.configuration.ClientId,
+                    this.configuration.ClientSecret);
+                var client = new CosmosClient(this.configuration.Endpoint, tokenCredential);
                 
                 var database = client.GetDatabase(this.configuration.DatabaseName);
                 
